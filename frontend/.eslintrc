@@ -1,0 +1,7 @@
+{
+    "extends" : [
+        "react-app"
+    ]
+}
+
+//eslintrc.cjs 파일에 써야 적용되는거 같은데 뭐지?
