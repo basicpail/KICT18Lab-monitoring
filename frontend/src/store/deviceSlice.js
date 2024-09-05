@@ -14,7 +14,8 @@ const initialState = {
     //    value: 3
     //}
     airmonitorData: [],
-    dashBoardGraphData: [{x: Date.now(), y: 0}],
+    // dashBoardGraphData: [{x: Date.now(), y: 0}],
+    dashBoardGraphData: [],
     isAuth: false,
     isLoading: false,
     error: ''
