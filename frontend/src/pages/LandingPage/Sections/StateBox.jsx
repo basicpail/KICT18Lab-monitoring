@@ -5,8 +5,7 @@ import { dataFormat } from '../../../utils/const';
 
 const StateBox = ({category}) => {
   let data = useSelector(state => state.device?.deviceAllData);
-  // if (data === undefined || Object.keys(data).length === 0) data = dataFormat
-  data === undefined || Object.keys(data).length === 0 ? data = dataFormat : dataFormat = data
+  if (data === undefined || Object.keys(data).length === 0) data = dataFormat
 
 
   const [objectkeys, setObjectkeys] = useState([]);

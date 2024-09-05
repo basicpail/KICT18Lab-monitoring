@@ -26,7 +26,7 @@ const ReportModal = ({ closeModal }) => {
 
   const handleFetchData = async () => {
     try {
-      const response = await axiosInstance.post('/devices/insertDeviceDataToDB', {
+      const response = await axiosInstance.post('/devices/getCSVDataFromDB', {
         startDate,
         endDate,
         selectedDataList,

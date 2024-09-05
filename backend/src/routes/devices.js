@@ -13,13 +13,7 @@ const {Device} = require('../models/Device');
 
 router.post('/control' , async (req, res, next) => {
     try {
-        // const data = await axios.post('http://119.30.150.230:4000/devices/control',{
-        //     selectedRoom: req.body.selectedRoom,
-        //     selectedDevice: req.body.selectedDevice,
-        //     selectedFunction: req.body.selectedFunction,
-        //     inputValue: req.body.inputValue
-        // })
-        // console.log(`${req.body.selectedcategory}, ${req.body.selectedDevice}, ${req.body.selectedFunction}, ${req.body.inputValue}`);
+
         const response = await writeModbus(
             req.body.selectedRoom, req.body.selectedDevice, req.body.selectedFunction, req.body.inputValue
         );
@@ -91,7 +85,7 @@ router.get('/requestSTAirmonitor', async (req, res, next) => {
 
 
 // 데이터 조회 및 변환 함수
-router.post('/insertDeviceDataToDB', async (req, res, next) => {
+router.post('/getCSVDataFromDB', async (req, res, next) => {
     try {
         const { startDate, endDate, selectedDataList } = req.body;
         const data = await getData(startDate, endDate, selectedDataList);

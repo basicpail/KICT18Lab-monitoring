@@ -18,15 +18,13 @@ import SettingPage from './pages/SettingPage'
 import ReportPage from './pages/ReportPage'
 import io from 'socket.io-client';
 import AirmonitorPage from './pages/AirMonitorPage'
-if (typeof window !== 'undefined') {
-  window.global = window;
-}
-// if (typeof window.global == 'undefined') {
-//   window.global = window.globalThis;
+// if (typeof window !== 'undefined') {
+//   window.global = window;
 // }
-//const socket = io('http://119.30.150.230:4000');
-//const socket = io('http://192.168.0.100:4000');
-const socket = io('http://119.30.150.230:4000', { // <외부IP>를 실제 외부 IP로 변경
+
+const socketAddr = import.meta.env.VITE_SOCKET_ADDR
+
+const socket = io(socketAddr, { // <외부IP>를 실제 외부 IP로 변경
   transports: ['websocket', 'polling'], // 사용할 전송 프로토콜 명시
   withCredentials: true,
 });
