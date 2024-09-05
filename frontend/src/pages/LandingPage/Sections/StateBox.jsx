@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-{/* {deviceData.map((data, index) => (
-  <div key={index} className=''>
-    <StateBox key={index} data={data} category='Room1 '/>
-  </div>
-))} */}
+import { dataFormat } from '../../../utils/const';
+
 
 const StateBox = ({category}) => {
-  const data = useSelector(state => state.device?.deviceAllData);
+  let data = useSelector(state => state.device?.deviceAllData);
+  // if (data === undefined || Object.keys(data).length === 0) data = dataFormat
+  data === undefined || Object.keys(data).length === 0 ? data = dataFormat : dataFormat = data
+
 
   const [objectkeys, setObjectkeys] = useState([]);
   const [isRoomDevice, setIsRoomDevice] = useState(false);

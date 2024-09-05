@@ -32,21 +32,37 @@ const CardItem = ({ graphDataList}) => {
   const chartData = useSelector(state => state.device?.dashBoardGraphData);
   
   const transformData = (data, category, entity) => {
+    // data
+    // .filter(entry => entry.y !== undefined && Object.keys(entry.y).length > 0)
+    // .map(entry => {
+    //   console.log('entry: ',entry)
+    //   console.log('category, entity:' ,category, entity)
+    //   console.log('entry.y:' ,entry.y)
+    //   console.log('entry.y[category]:' ,entry.y[category])
+    //   console.log('entry.y[category][entity]:' ,entry.y[category][entity])
+    //   console.log('Object.keys(entry.y).length', Object.keys(entry.y).length)
+    // })
     if (category === 'Room1' || category === 'Room2') {
-      return data.map(entry => {
-        return {
-            x: entry.x,
-            y: entry.y[category][entity][graphDataList['secondEntity']]
-        };
-      });      
+      return data
+        .filter(entry => entry.y !== undefined && Object.keys(entry.y).length > 0)
+        .map(entry => {
+          return {
+              x: entry.x,
+              y: entry.y[category][entity][graphDataList['secondEntity']]
+          };
+        }
+      );      
     }
     else {
-      return data.map(entry => {
-        return {
-            x: entry.x,
-            y: entry.y[category][entity]
-        };
-      });
+      return data
+        .filter(entry => entry.y !== undefined && Object.keys(entry.y).length > 0)
+        .map(entry => {
+          return {
+              x: entry.x,
+              y: entry.y[category][entity]
+          };
+        }
+      );
     }
   };
 

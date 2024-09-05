@@ -6,6 +6,7 @@ import downsample from 'chartjs-plugin-downsample';
 import axios from 'axios';
 import axiosInstance from '../../utils/axios';
 import { toast } from "react-toastify";
+import { dataList } from '../../utils/const';
 
 
 //Chart.register(DownSamplePlugin);
@@ -116,7 +117,7 @@ const ReportPage = () => {
     setChartDataList(prevList => prevList.filter((_, i) => i !== index));
   };
 
-  const dataList = ['급기풍량', '급기온도', '급기Co2', '배기풍량', '배기온도', '배기Co2','누적전력량', '전압', '전류', '전력', 'Room1 SMD 디퓨저 목표 개도 값', 'Room1 SMD 설정 풍량', 'Room1 SMD 풍량제어 제어시간 간격', 'Room1 SMD 풍량제어 목표도달 판단기준값', 'Room1 SMD 풍량제어 디퓨저 개도 위치 조정값', 'Room1 SMD 설정온도', 'Room1 SMD 온도제어 제어시간 간격', 'Room1 SMD 현재 개도 값', 'Room1 SMD 현재풍량', 'Room1 SMD 실내온도', 'Room1 SMD 공급 대기 온도', 'Room1 SMD Co2농도', 'Room1 SMU 디퓨저 목표 개도 값', 'Room1 SMU 설정 풍량', 'Room1 SMU 풍량제어 제어시간 간격', 'Room1 SMU 풍량제어 목표도달 판단기준값', 'Room1 SMU 풍량제어 디퓨저 개도 위치 조정값', 'Room1 SMU 설정온도', 'Room1 SMU 온도제어 제어시간 간격', 'Room1 SMU 현재 개도 값', 'Room1 SMU 현재풍량', 'Room1 SMU 실내온도', 'Room1 SMU 공급 대기 온도', 'Room1 SMU Co2농도', 'Room2 SMD 디퓨저 목표 개도 값', 'Room2 SMD 설정 풍량', 'Room2 SMD 풍량제어 제어시간 간격', 'Room2 SMD 풍량제어 목표도달 판단기준값', 'Room2 SMD 풍량제어 디퓨저 개도 위치 조정값', 'Room2 SMD 설정온도', 'Room2 SMD 온도제어 제어시간 간격', 'Room2 SMD 현재 개도 값', 'Room2 SMD 현재풍량', 'Room2 SMD 실내온도', 'Room2 SMD 공급 대기 온도', 'Room2 SMD Co2농도', 'Room2 SMU 디퓨저 목표 개도 값', 'Room2 SMU 설정 풍량', 'Room2 SMU 풍량제어 제어시간 간격', 'Room2 SMU 풍량제어 목표도달 판단기준값', 'Room2 SMU 풍량제어 디퓨저 개도 위치 조정값', 'Room2 SMU 설정온도', 'Room2 SMU 온도제어 제어시간 간격', 'Room2 SMU 현재 개도 값', 'Room2 SMU 현재풍량', 'Room2 SMU 실내온도', 'Room2 SMU 공급 대기 온도', 'Room2 SMU Co2농도', ];
+  // const dataList = ['급기풍량', '급기온도', '급기Co2', '배기풍량', '배기온도', '배기Co2','누적전력량', '전압', '전류', '전력', 'Room1 SMD 디퓨저 목표 개도 값', 'Room1 SMD 설정 풍량', 'Room1 SMD 풍량제어 제어시간 간격', 'Room1 SMD 풍량제어 목표도달 판단기준값', 'Room1 SMD 풍량제어 디퓨저 개도 위치 조정값', 'Room1 SMD 설정온도', 'Room1 SMD 온도제어 제어시간 간격', 'Room1 SMD 현재 개도 값', 'Room1 SMD 현재풍량', 'Room1 SMD 실내온도', 'Room1 SMD 공급 대기 온도', 'Room1 SMD Co2농도', 'Room1 SMU 디퓨저 목표 개도 값', 'Room1 SMU 설정 풍량', 'Room1 SMU 풍량제어 제어시간 간격', 'Room1 SMU 풍량제어 목표도달 판단기준값', 'Room1 SMU 풍량제어 디퓨저 개도 위치 조정값', 'Room1 SMU 설정온도', 'Room1 SMU 온도제어 제어시간 간격', 'Room1 SMU 현재 개도 값', 'Room1 SMU 현재풍량', 'Room1 SMU 실내온도', 'Room1 SMU 공급 대기 온도', 'Room1 SMU Co2농도', 'Room2 SMD 디퓨저 목표 개도 값', 'Room2 SMD 설정 풍량', 'Room2 SMD 풍량제어 제어시간 간격', 'Room2 SMD 풍량제어 목표도달 판단기준값', 'Room2 SMD 풍량제어 디퓨저 개도 위치 조정값', 'Room2 SMD 설정온도', 'Room2 SMD 온도제어 제어시간 간격', 'Room2 SMD 현재 개도 값', 'Room2 SMD 현재풍량', 'Room2 SMD 실내온도', 'Room2 SMD 공급 대기 온도', 'Room2 SMD Co2농도', 'Room2 SMU 디퓨저 목표 개도 값', 'Room2 SMU 설정 풍량', 'Room2 SMU 풍량제어 제어시간 간격', 'Room2 SMU 풍량제어 목표도달 판단기준값', 'Room2 SMU 풍량제어 디퓨저 개도 위치 조정값', 'Room2 SMU 설정온도', 'Room2 SMU 온도제어 제어시간 간격', 'Room2 SMU 현재 개도 값', 'Room2 SMU 현재풍량', 'Room2 SMU 실내온도', 'Room2 SMU 공급 대기 온도', 'Room2 SMU Co2농도', ];
   const filteredDataList = dataList.filter(data => data.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (

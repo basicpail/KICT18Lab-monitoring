@@ -158,19 +158,44 @@ async function readModbus(slaveId, address, length, description) {
 
 // 쓰기 함수
 //async function writeModbus(slaveId, address, value) {
-async function writeModbus(room, device, func, input) {
-  try {
-    let { slaveId, address, value } = convertToControlParams(room, device, func, input)
-    //console.log(`slaveId: ${slaveId}, address: ${address}, value: ${value}`)
-    client.setID(slaveId);
-    const response = await withTimeout(client.writeRegister(address, value),2000);
-    console.log('Data written successfully: ',response);
-    return `Data written successfully`;
-  } catch (err) {
-    console.error('Error writing data:', err);
-    return err.message;
+// async function writeModbus(room, device, func, input) {
+//   try {
+//     let { slaveId, address, value } = convertToControlParams(room, device, func, input)
+//     //console.log(`slaveId: ${slaveId}, address: ${address}, value: ${value}`)
+//     client.setID(slaveId);
+//     const response = await withTimeout(client.writeRegister(address, value),2000);
+//     console.log('Data written successfully: ',response);
+//     return `Data written successfully`;
+//   } catch (err) {
+//     console.error('Error writing data:', err);
+//     return err.message;
+//   }
+// }
+async function writeModbus(room, device, func, input, maxRetries = 3, retryDelay = 100) {
+  let retries = 0;
+  
+  while (retries < maxRetries) {
+    try {
+      let { slaveId, address, value } = convertToControlParams(room, device, func, input);
+      console.log(`slaveId: ${slaveId}, address: ${address}, value: ${value}`);
+      client.setID(slaveId);
+      const response = await withTimeout(client.writeRegister(address, value), 500);
+      // const response = await client.writeRegister(address, value);
+      console.log('Data written successfully: ', response);
+      return `Data written successfully`;
+    } catch (err) {
+      console.error('Error writing data:', err);
+      retries++;
+      if (retries < maxRetries) {
+        console.log(`Retrying in ${retryDelay}ms... (${retries}/${maxRetries})`);
+        await new Promise(resolve => setTimeout(resolve, retryDelay));
+      } else {
+        return err.message;
+      }
+    }
   }
 }
+
 
 // 연결 후 읽기와 쓰기 호출
 async function performModbusActions() {
